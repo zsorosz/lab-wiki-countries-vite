@@ -6,6 +6,13 @@ function CountryDetails({ countries }) {
   const foundCountry = countries.find((oneCountry) => {
     return oneCountry.alpha3Code === alpha3Code;
   });
+  const findBorderCountry = (alpha3Code) => {
+    let foundBorderCountry = countries.find((oneCountry) => {
+      return oneCountry.alpha3Code === alpha3Code;
+    });
+    return foundBorderCountry;
+  };
+
   return (
     <div>
       {!foundCountry ? (
@@ -17,6 +24,30 @@ function CountryDetails({ countries }) {
             alt="flag"
           ></img>
           <h2>{foundCountry.name.official}</h2>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Capital</th>
+                <td>{foundCountry.capital}</td>
+              </tr>
+              <tr>
+                <th scope="row">Area</th>
+                <td>{foundCountry.area} km²</td>
+              </tr>
+              <tr>
+                <th scope="row">Borders</th>
+                <td colspan="2">
+                  {foundCountry.borders.map((country) => (
+                    <li key={country}>
+                      <Link to={`/${country}`}>
+                        {findBorderCountry(country).name.common}
+                      </Link>
+                    </li>
+                  ))}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       )}
     </div>

@@ -14,7 +14,6 @@ function App() {
       <div style={{ display: "flex" }}>
         <CountriesList countries={countries} />
         <Routes>
-          <Route path="/" element={<App />} />
           <Route
             path="/:alpha3Code"
             element={<CountryDetails countries={countries} />}
