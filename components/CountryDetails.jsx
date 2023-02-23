@@ -3,24 +3,17 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-function CountryDetails({ countries }) {
+function CountryDetails() {
   const [countryState, setCountryState] = useState({
-    name: { official: "" },
+    name: { common: "" },
     capital: "",
     area: "",
     borders: [],
     alpha2Code: "",
   });
+
   const { alpha3Code } = useParams();
-  //   const foundCountry = countries.find((oneCountry) => {
-  //     return oneCountry.alpha3Code === alpha3Code;
-  //   });
-  //   const findBorderCountry = (alpha3Code) => {
-  //     let foundBorderCountry = countries.find((oneCountry) => {
-  //       return oneCountry.alpha3Code === alpha3Code;
-  //     });
-  //     return foundBorderCountry;
-  //   };
+
   useEffect(() => {
     async function fetchCountries() {
       const response = await axios.get(
@@ -32,7 +25,7 @@ function CountryDetails({ countries }) {
   }, [alpha3Code]);
 
   return (
-    <div>
+    <div className="col-7">
       {!countryState ? (
         <p>Country not found</p>
       ) : (
@@ -42,10 +35,12 @@ function CountryDetails({ countries }) {
             alt="flag"
           ></img>
           <h2>{countryState.name.official}</h2>
-          <table class="table">
+          <table className="table">
             <tbody>
               <tr>
-                <th scope="row">Capital</th>
+                <th scope="row" style={{ width: "30%" }}>
+                  Capital
+                </th>
                 <td>{countryState.capital}</td>
               </tr>
               <tr>
@@ -54,12 +49,10 @@ function CountryDetails({ countries }) {
               </tr>
               <tr>
                 <th scope="row">Borders</th>
-                <td colspan="2">
+                <td colSpan="2">
                   {countryState.borders.map((country) => (
                     <li key={country}>
-                      <Link to={`/${country}`}>
-                        {/* {findBorderCountry(country).name.common} */}
-                      </Link>
+                      <Link to={`/${country}`}>{country}</Link>
                     </li>
                   ))}
                 </td>

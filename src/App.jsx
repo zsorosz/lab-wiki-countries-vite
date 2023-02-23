@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-// import allCountries from "./countries.json";
 import Navbar from "../components/Navbar";
 import CountriesList from "../components/CountriesList";
 import { Routes, Route } from "react-router-dom";
@@ -23,15 +22,13 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div style={{ display: "flex" }}>
-        <CountriesList countries={countries} />
-        <Routes>
-          {/* <Route path="/" element={<CountriesList countries={countries} />} /> */}
-          <Route
-            path="/:alpha3Code"
-            element={<CountryDetails countries={countries} />}
-          />
-        </Routes>
+      <div class="container">
+        <div class="row">
+          <CountriesList countries={countries} />
+          <Routes>
+            <Route path="/:alpha3Code" element={<CountryDetails />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

@@ -1,16 +1,25 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function CountriesList({ countries }) {
   return (
-    <div>
+    <div className="col-5" style={{ maxHeight: "90vh", overflow: "scroll" }}>
       {countries.map((country) => (
-        <div key={country.name.official} className="country">
-          <Link to={`/${country.alpha3Code}`}>
-            {country.name.official}
+        <div key={country.alpha3Code} className="list-group">
+          <Link
+            to={`/${country.alpha3Code}`}
+            className="list-group-item list-group-item-action"
+            style={{
+              display: "flex",
+              flexDirection: "column-reverse",
+              alignItems: "center",
+            }}
+          >
+            {country.name.common}
             <img
               src={`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`}
               alt="flag"
+              style={{ width: "50px" }}
             ></img>
           </Link>
         </div>
