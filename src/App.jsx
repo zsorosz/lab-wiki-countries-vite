@@ -26,7 +26,10 @@ function App() {
         <div class="row">
           <CountriesList countries={countries} />
           <Routes>
-            <Route path="/:alpha3Code" element={<CountryDetails />} />
+            <Route
+              path="/:alpha3Code"
+              element={<CountryDetails countries={countries} />}
+            />
           </Routes>
         </div>
       </div>

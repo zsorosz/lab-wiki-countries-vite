@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-function CountryDetails() {
+function CountryDetails({ countries }) {
   const [countryState, setCountryState] = useState({
     name: { common: "" },
     capital: "",
@@ -50,10 +50,16 @@ function CountryDetails() {
               <tr>
                 <th scope="row">Borders</th>
                 <td colSpan="2">
-                  {countryState.borders.map((country) => (
-                    <li key={country}>
-                      <Link to={`/${country}`}>{country}</Link>
-                    </li>
+                  {countryState.borders.map((border) => (
+                    <Link to={`/${border}`}>
+                      <li>
+                        {
+                          countries.filter(
+                            (country) => country.alpha3Code === border
+                          )[0].name.common
+                        }
+                      </li>
+                    </Link>
                   ))}
                 </td>
               </tr>
